@@ -1,0 +1,5 @@
+### Mostrar Todos los roles
+GET http://localhost:8081/api/roles
+
+### Mostrar por Id
+GET http://localhost:8081/api/roles/1
