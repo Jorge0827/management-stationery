@@ -1,5 +1,4 @@
-package com.jorgeechavarria.stationery.management_stationery.models.dtos.DtoRoles;
-
+package com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles;
 import lombok.Data;
 
 @Data

@@ -2,7 +2,7 @@ package com.jorgeechavarria.stationery.management_stationery.services.Roles;
 
 import java.util.List;
 
-import com.jorgeechavarria.stationery.management_stationery.models.dtos.DtoRoles.RolResponse;
+import com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles.RolResponse;
 
 public interface RolService {
 
