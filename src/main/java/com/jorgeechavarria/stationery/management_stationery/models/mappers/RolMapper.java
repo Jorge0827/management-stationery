@@ -1,7 +1,6 @@
 package com.jorgeechavarria.stationery.management_stationery.models.mappers;
 
 import org.springframework.stereotype.Component;
-
 import com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles.RolResponse;
 import com.jorgeechavarria.stationery.management_stationery.models.entities.Rol;
 
