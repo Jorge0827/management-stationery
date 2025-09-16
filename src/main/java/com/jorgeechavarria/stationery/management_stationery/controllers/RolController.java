@@ -1,7 +1,6 @@
 package com.jorgeechavarria.stationery.management_stationery.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles.RolResponse;
 import com.jorgeechavarria.stationery.management_stationery.services.Roles.RolService;
 import lombok.extern.slf4j.Slf4j;
