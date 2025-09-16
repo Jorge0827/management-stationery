@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.jorgeechavarria.stationery.management_stationery.models.dtos.DtoRoles.RolResponse;
+import com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles.RolResponse;
 import com.jorgeechavarria.stationery.management_stationery.models.entities.Rol;
 import com.jorgeechavarria.stationery.management_stationery.models.mappers.RolMapper;
 import com.jorgeechavarria.stationery.management_stationery.repository.roles.RolRepository;

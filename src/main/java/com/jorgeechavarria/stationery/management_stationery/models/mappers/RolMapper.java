@@ -1,7 +1,8 @@
 package com.jorgeechavarria.stationery.management_stationery.models.mappers;
 
 import org.springframework.stereotype.Component;
-import com.jorgeechavarria.stationery.management_stationery.models.dtos.DtoRoles.RolResponse;
+
+import com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles.RolResponse;
 import com.jorgeechavarria.stationery.management_stationery.models.entities.Rol;
 
 @Component // Esta clase es un bean, crea y se guarda en contenedor "OBJETO"
