@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import com.jorgeechavarria.stationery.management_stationery.exceptions.EmailAlreadyExistsException;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.RolNotFoundException;
+import com.jorgeechavarria.stationery.management_stationery.exceptions.RoleNotFoundException;
+import com.jorgeechavarria.stationery.management_stationery.exceptions.UserNotFoundException;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice
@@ -44,5 +48,36 @@ public class GlobalExceptionHandler {
         );
         
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleRoleNotFound(RoleNotFoundException ex, HttpServletRequest request){
+        log.warn("Rol no encontrado: {}", ex.getMessage());
+        ApiErrorResponse body = new ApiErrorResponse(
+        HttpStatus.NOT_FOUND, 
+        ex.getMessage(), 
+        request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleUserNotFound(UserNotFoundException ex, HttpServletRequest request){
+        log.warn("Usuario no encontrado {}", ex.getMessage());
+        ApiErrorResponse body = new ApiErrorResponse(
+        HttpStatus.NOT_FOUND, 
+        ex.getMessage(), 
+        request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ApiErrorResponse> handleEmailAlreadyExists(EmailAlreadyExistsException ex, HttpServletRequest request){
+        ApiErrorResponse error = new ApiErrorResponse(
+        HttpStatus.CONFLICT,
+        ex.getMessage(), 
+        request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
