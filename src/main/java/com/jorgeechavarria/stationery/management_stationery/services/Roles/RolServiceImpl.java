@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.jorgeechavarria.stationery.management_stationery.exceptions.RolNotFoundException;
 import com.jorgeechavarria.stationery.management_stationery.models.dtos.dtoRoles.RolResponse;
 import com.jorgeechavarria.stationery.management_stationery.models.entities.Rol;
 import com.jorgeechavarria.stationery.management_stationery.models.mappers.RolMapper;
@@ -27,30 +28,22 @@ public class RolServiceImpl implements RolService {
     // Obtener todos los roles
     @Override
     public List<RolResponse> getAll() {
-        log.debug("Inicio de consulta de todos los roles");
         List<Rol> roles = rolRepository.findAll();
-        log.debug("Se encontraron {} roles en BD", roles.size());
+        
+        if (roles.isEmpty()) {
+            return List.of();
+        }
 
-        List<RolResponse> response = roles.stream()
-                .map(rolMapper::toResponse).toList();
-
-        log.info("Consulta con exito: {} roles devueltos", response.size());
-        return response;
+        return roles.stream()
+                .map(rolMapper::toResponse)
+                .toList();
     }
 
     @Override
     public RolResponse getById(Integer id) {
-        log.debug("Buscando rol con ID: {}", id);
-        var existingRol = rolRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.warn("Rol con ID {} no fue encontrado", id);
-                    return new RuntimeException("Rol no encontrado");
+        Rol existingRol = rolRepository.findById(id)
+                .orElseThrow(() -> new RolNotFoundException("No se encontró un rol con ID: " + id));
 
-                });
-
-        RolResponse response = rolMapper.toResponse(existingRol);
-        log.info("Rol encontrado: {} (ID: {})", response.getRolName(), id);
-        return response;
-
+        return rolMapper.toResponse(existingRol);
     }
 }
