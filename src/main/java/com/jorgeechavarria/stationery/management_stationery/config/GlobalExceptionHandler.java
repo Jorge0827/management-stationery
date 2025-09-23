@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import com.jorgeechavarria.stationery.management_stationery.exceptions.EmailAlreadyExistsException;
+import com.jorgeechavarria.stationery.management_stationery.exceptions.IdNotFoundException;
+import com.jorgeechavarria.stationery.management_stationery.exceptions.NitAlreadyExistsExcepcion;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.RolNotFoundException;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.RoleNotFoundException;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.UserNotFoundException;
@@ -80,4 +82,26 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
+
+    @ExceptionHandler(NitAlreadyExistsExcepcion.class)
+    public ResponseEntity<ApiErrorResponse> handleNitAlreadyExists(NitAlreadyExistsExcepcion ex, HttpServletRequest request){
+        ApiErrorResponse error = new ApiErrorResponse(
+        HttpStatus.CONFLICT,
+        ex.getMessage(), 
+        request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+}
+
+    @ExceptionHandler(IdNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleIdNotFound(IdNotFoundException ex, HttpServletRequest request){
+        log.warn("Id no encontrado: {}", ex.getMessage());
+        ApiErrorResponse body = new ApiErrorResponse(
+        HttpStatus.NOT_FOUND, 
+        ex.getMessage(), 
+        request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
 }
