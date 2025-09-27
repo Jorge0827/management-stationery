@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import com.jorgeechavarria.stationery.management_stationery.exceptions.DuplicateResourceException;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.EmailAlreadyExistsException;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.IdNotFoundException;
 import com.jorgeechavarria.stationery.management_stationery.exceptions.NitAlreadyExistsExcepcion;
@@ -102,6 +103,16 @@ public class GlobalExceptionHandler {
         request.getRequestURI()
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(DuplicateResourceException.class)
+    public ResponseEntity<ApiErrorResponse> handleEmailAlreadyExists(DuplicateResourceException ex, HttpServletRequest request){
+        ApiErrorResponse error = new ApiErrorResponse(
+        HttpStatus.CONFLICT,
+        ex.getMessage(), 
+        request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
 }

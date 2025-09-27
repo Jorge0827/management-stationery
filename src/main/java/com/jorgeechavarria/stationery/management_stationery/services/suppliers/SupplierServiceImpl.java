@@ -75,7 +75,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponse update(Integer id, SupplierRequest request) {
         log.info("Verificando existencia de id");
         var existingId = supplierRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(id));
+                .orElseThrow(() -> new IdNotFoundException("El id " + id + "No existe"));
 
         existingId.setName(request.getName());
         existingId.setEmail(request.getEmail());
@@ -93,7 +93,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponse delete(Integer id) {
         log.info("Eliminando proveedor con id" + id);
         var existingId = supplierRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(id));
+                .orElseThrow(() -> new IdNotFoundException("El id " + id + "No existe"));
 
         supplierRepository.delete(existingId);
         log.info("Proveedor eliminado exitosamente" + existingId.getName());
