@@ -17,15 +17,15 @@ Content-Type: application/json
 }
 
 ### Actualizar producto
-PUT http://localhost:8081/api/products/CUADERNO1
+PUT http://localhost:8081/api/products/CUA1
 Content-Type: application/json
 
 {
     "id": "CUA1",
     "name": "Cuaderno Rallado 100 hojas",
     "description": "Cuaderno cosido etc-----",
-    "unitPrice": "3000.0",
-    "currentStock": "21"
+    "unitPrice": "9000.0",
+    "currentStock": "12"
 }
 
 ### Eliminar producto
